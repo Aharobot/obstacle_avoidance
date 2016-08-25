@@ -1,0 +1,25 @@
+<launch>
+
+  <!-- MOVE_BASE -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+    <rosparam file="$(find obstacle_avoidance)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find obstacle_avoidance)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find obstacle_avoidance)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find obstacle_avoidance)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find obstacle_avoidance)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find obstacle_avoidance)/config/navfn_global_planner.yaml" command="load" />
+    <param name="controller_frequency" value="1.0" />
+    <remap from="odom" to="/vrep/ugv1/odom"/>
+    <remap from="cmd_vel" to="cmd_vel2"/>
+  </node>
+
+  <node pkg="obstacle_avoidance" type="velocity_conversion" name="velocity_conversion" output="screen">
+    <remap from="tracks" to="/vrep/ugv1/tracks_vel_cmd"/>
+  </node>
+
+  <node pkg="obstacle_avoidance" type="pcl_filter" name="pcl_filter" output="screen">
+    <remap from="input" to="/vrep/ugv1/scan_point_cloud_color"/>
+    <remap from="output" to="/vrep/ugv1/scan_point_cloud_color_filtered"/>
+  </node>
+
+</launch>

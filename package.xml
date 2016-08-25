@@ -1,0 +1,18 @@
+<package>
+  <name>obstacle_avoidance</name>
+  <version>0.0.1</version>
+  <description>obstacle_avoidance</description>
+  <author>hh</author>
+  <maintainer email="hh@uib.cat">hh</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nifti_robot_driver_msgs</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nifti_robot_driver_msgs</run_depend>
+</package>
