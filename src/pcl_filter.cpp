@@ -15,11 +15,11 @@ class DummyClass {
     ROS_INFO("READY??");
     while (nh.ok()){
       try {
-        listener.waitForTransform("/ugv1/base_link", "/ugv1/laser",
-        // listener.waitForTransform("/base_link", "/laser",
+        // listener.waitForTransform("/ugv1/base_link", "/ugv1/laser",
+        listener.waitForTransform("/base_link", "/laser",
                                   ros::Time(0), ros::Duration(0.5));
-        listener.lookupTransform("/ugv1/base_link", "/ugv1/laser",
-        // listener.lookupTransform("/base_link", "/laser",
+        // listener.lookupTransform("/ugv1/base_link", "/ugv1/laser",
+        listener.lookupTransform("/base_link", "/laser",
                                  ros::Time(0), transform);
         if (!ready) {
           ready = true;
@@ -40,8 +40,8 @@ class DummyClass {
     //pcl_ros::transformPointCloud ("/ugv1/base_link", *msg, *cloud_base_link, listener);
     pcl_ros::transformPointCloud (*msg, *cloud_base_link, transform);
 
-    cloud_base_link->header.frame_id = "/ugv1/base_link";
-    // cloud_base_link->header.frame_id = "/base_link";
+    // cloud_base_link->header.frame_id = "/ugv1/base_link";
+    cloud_base_link->header.frame_id = "/base_link";
 
     PointCloud::Ptr cloud_filtered(new PointCloud);
     // Create the filtering object
